@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Casey Ramone Start Page</title>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
   body {
     background-color: #000000;
-    color: #ff3333; /* links and buttons */
+    color: #ff3333;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     margin: 0;
@@ -19,16 +20,17 @@
   h1 {
     font-family: 'UnifrakturCook', cursive;
     font-size: 4em;
-    margin-bottom: 30px;
-    color: #cc2222; /* darker red */
+    margin-bottom: 25px;
+    color: #cc2222;
     text-shadow: 2px 2px 6px #000;
   }
 
   #clock {
+    font-family: 'UnifrakturCook', cursive;
     font-size: 1.8em;
-    margin-bottom: 30px;
-    color: #cc2222; /* darker red */
-    font-weight: 500;
+    margin-bottom: 35px;
+    color: #cc2222;
+    line-height: 1.4;
   }
 
   form {
@@ -92,16 +94,17 @@
     opacity: 0.4;
   }
 
-  /* Optional slightly different second divider */
   .divider-bottom {
     height: 1px;
     width: 50%;
-    background-color: #cc2222; /* darker red */
+    background-color: #cc2222;
     margin: 20px auto;
     opacity: 0.3;
   }
+
 </style>
 </head>
+
 <body>
 
 <h1>Welcome</h1>
@@ -109,7 +112,7 @@
 <div id="clock"></div>
 
 <form action="https://www.google.com/search" method="get" target="_blank">
-  <input type="text" name="q" placeholder="Search">
+  <input type="text" name="q" placeholder="Search...">
   <input type="submit" value="Go">
 </form>
 
@@ -123,14 +126,15 @@
   <a href="https://github.com">GitHub</a>
 </div>
 
-<!-- Second divider below links -->
 <div class="divider-bottom"></div>
 
 <script>
 function updateClock() {
+
   const now = new Date();
 
   const day = now.getDate();
+
   const daySuffix = (d) => {
     if (d > 3 && d < 21) return 'th';
     switch (d % 10) {
@@ -141,21 +145,26 @@ function updateClock() {
     }
   };
 
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-                      "July", "August", "September", "October", "November", "December"];
+  const monthNames = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+  ];
+
   const year = now.getFullYear();
 
   let hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2,'0');
+
   const period = hours >= 12 ? 'PM' : 'AM';
   const hour12 = hours % 12 === 0 ? 12 : hours % 12;
 
-  const dateStr = `The ${day}${daySuffix(day)} of ${monthNames[now.getMonth()]}, ${year} ${hour12}:${minutes} ${period}`;
-  
-  document.getElementById("clock").textContent = dateStr;
+  const timeStr = `${hour12}:${minutes} ${period}`;
+  const dateStr = `The ${day}${daySuffix(day)} of ${monthNames[now.getMonth()]}, ${year}`;
+
+  document.getElementById("clock").innerHTML = `${timeStr}<br>${dateStr}`;
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 updateClock();
 </script>
 
